@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-slate-800 w-full fixed bottom-0 text-white py-4 flex flex-col items-center space-y-2">
+    <div className="bg-slate-800 w-full  bottom-0 text-white py-4 flex flex-col items-center space-y-2">
       {/* Logo */}
       <div className="logo font-bold text-2xl">
         <span className="text-green-500">&lt;</span>
