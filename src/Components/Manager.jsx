@@ -11,12 +11,18 @@ const Manager = () => {
   const [form, setForm] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordArray] = useState([]);
 
+  const getPasswords = async() => {
+    let req = await fetch("http://localhost:3000/");
+    let passwords = await req.json()
+    console.log(passwords)
+    setPasswordArray(passwords)
+  }
+  
+
   // Load passwords from localStorage on mount
   useEffect(() => {
-    const passwords = localStorage.getItem("passwords");
-    if (passwords) {
-      setPasswordArray(JSON.parse(passwords));
-    }
+    getPasswords()
+    
   }, []);
 
   // Function to copy text to clipboard
