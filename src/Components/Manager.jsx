@@ -52,10 +52,11 @@ const Manager = () => {
   };
 
   // Save new password to the array and localStorage
-  const savePassword = () => {
+  const savePassword = async() => {
     const updatedPasswords = [...passwordArray, { ...form, id: uuidv4() }];
     setPasswordArray(updatedPasswords);
-    localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+    // localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+    let res = await fetch("http://localhost:3000/", {method :"POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...form, id: uuidv4()})})
     setForm({ site: "", username: "", password: "" }); // Clear form after saving
     
     toast("Successfully saved 💾 password", {
@@ -70,7 +71,7 @@ const Manager = () => {
     });
   };
 
-  const deletePassword = (id) => {
+  const deletePassword = async(id) => {
     console.log("Deleting password with id", id);
 
     let c = confirm("Do you really wanna delete this password?");
@@ -79,7 +80,9 @@ const Manager = () => {
         (password) => password.id !== id
       );
       setPasswordArray(updatedPasswords);
-      localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+      // localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
+      let res = await fetch("http://localhost:3000/", {method :"DELETE", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...form, id})})
+    
 
       toast("Successfully deleted 🗑️ Password", {
         position: "top-right",
